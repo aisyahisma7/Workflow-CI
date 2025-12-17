@@ -38,12 +38,19 @@ jobs:
           mlflow run . --env-manager=local
 
       - name: Check results
-        if: always()
         run: |
           if [ -d "MLProject/mlruns" ]; then
             echo "Training completed"
             ls -la MLProject/mlruns/
           fi
 
+      - name: Commit artifacts to repository
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add MLProject/mlruns/ || true
+          git commit -m "Update model artifacts [skip ci]" || echo "No changes"
+          git push || echo "No changes to push"
+
 permissions:
-  contents: read
+  contents: write
