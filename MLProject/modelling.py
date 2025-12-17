@@ -5,6 +5,8 @@ from mlflow.models.signature import infer_signature
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
+mlflow.set_tracking_uri("file:./mlruns")
+mlflow.set_experiment("ci-training")
 
 def train_model():
     # Load processed data
