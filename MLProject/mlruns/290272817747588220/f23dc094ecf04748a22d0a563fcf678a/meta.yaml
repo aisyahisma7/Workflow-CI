@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/MLProject/mlruns/290272817747588220/f23dc094ecf04748a22d0a563fcf678a/artifacts
+end_time: 1765959336731
+entry_point_name: ''
+experiment_id: '290272817747588220'
+lifecycle_stage: active
+run_id: f23dc094ecf04748a22d0a563fcf678a
+run_name: handsome-squid-77
+run_uuid: f23dc094ecf04748a22d0a563fcf678a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765959333423
+status: 3
+tags: []
+user_id: runner
