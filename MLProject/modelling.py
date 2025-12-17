@@ -4,8 +4,10 @@ import mlflow.sklearn
 from mlflow.models.signature import infer_signature
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+import os
 
-mlflow.set_tracking_uri("file:./mlruns")
+os.environ["MLFLOW_TRACKING_URI"] = "file:./mlruns"
+os.environ["MLFLOW_ARTIFACT_URI"] = "file:./mlruns"
 
 def train_model():
     # Load processed data
