@@ -27,3 +27,4 @@ Kolom target yang digunakan adalah **Outcome**, di mana nilai `1` menunjukkan di
 - GitHub Actions
 - Scikit-learn
 - Python
+- Docker
