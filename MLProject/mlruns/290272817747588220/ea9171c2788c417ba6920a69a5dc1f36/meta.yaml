@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/MLProject/mlruns/290272817747588220/ea9171c2788c417ba6920a69a5dc1f36/artifacts
+end_time: 1765958013083
+entry_point_name: ''
+experiment_id: '290272817747588220'
+lifecycle_stage: active
+run_id: ea9171c2788c417ba6920a69a5dc1f36
+run_name: wistful-frog-519
+run_uuid: ea9171c2788c417ba6920a69a5dc1f36
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765958009694
+status: 3
+tags: []
+user_id: runner
