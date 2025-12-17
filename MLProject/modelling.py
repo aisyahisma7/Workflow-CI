@@ -18,46 +18,44 @@ def train_model():
 
     mlflow.sklearn.autolog()
 
-    with mlflow.start_run(run_name="basic_rf"):
-        model = RandomForestClassifier(
+    model = RandomForestClassifier(
             n_estimators=100,
             random_state=42
         )
-        model.fit(X_train, y_train)
+    model.fit(X_train, y_train)
 
-        y_pred = model.predict(X_test)
-        acc = accuracy_score(y_test, y_pred)
-        prec = precision_score(y_test, y_pred)
-        rec = recall_score(y_test, y_pred)
-        f1 = f1_score(y_test, y_pred)
+    y_pred = model.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+    prec = precision_score(y_test, y_pred)
+    rec = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
+      
+    mlflow.log_param("model_type", "RandomForestClassifier")
+    mlflow.log_param("n_estimators", 100)
         
-        mlflow.log_param("model_type", "RandomForestClassifier")
-        mlflow.log_param("n_estimators", 100)
+    mlflow.log_metric("accuracy", acc)
+    mlflow.log_metric("precision", prec)
+    mlflow.log_metric("recall", rec)
+    mlflow.log_metric("f1_score", f1)
         
-        mlflow.log_metric("accuracy", acc)
-        mlflow.log_metric("precision", prec)
-        mlflow.log_metric("recall", rec)
-        mlflow.log_metric("f1_score", f1)
-        
-        signature = infer_signature(X_train, model.predict(X_train))
-        input_example = X_train.head(1)
+    signature = infer_signature(X_train, model.predict(X_train))
+    input_example = X_train.head(1)
 
-        mlflow.sklearn.log_model(
-            model, 
-            "model", 
-            signature=signature,
-            input_example=input_example
-        )
+    mlflow.sklearn.log_model(
+        model, 
+        "model", 
+        signature=signature,
+        input_example=input_example
+    )
                 
-        print(f"\nResults:")
-        print(f"Accuracy: {acc:.4f}")
-        print(f"Precision: {prec:.4f}")
+    print(f"\nResults:")
+    print(f"Accuracy: {acc:.4f}")
+    print(f"Precision: {prec:.4f}")
 
-        run = mlflow.active_run()
-        print(f"\nMLflow Run ID: {run.info.run_id}")
+    run = mlflow.active_run()
+    print(f"\nMLflow Run ID: {run.info.run_id}")
 
 if __name__ == "__main__":
     mlflow.set_tracking_uri("file:./mlruns")
-    mlflow.set_experiment("diabetes_prediction")
 
     train_model()
