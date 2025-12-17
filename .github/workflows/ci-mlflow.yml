@@ -85,11 +85,20 @@ jobs:
           git commit -m "Update model artifacts [skip ci]" || echo "No changes"
           git push || echo "No changes to push"
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          install: true
+
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Install Docker Python package
+        run: |
+          pip install docker
 
       - name: Build Docker image
         run: |
@@ -97,6 +106,8 @@ jobs:
           
           MODEL_PATH="${{ steps.find_model.outputs.model_path }}"
           echo "Building Docker image from: $MODEL_PATH"
+    
+          export DOCKER_HOST=unix:///var/run/docker.sock
 
           mlflow models build-docker \
             -m "$(pwd)/$MODEL_PATH" \
