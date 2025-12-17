@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/MLProject/mlruns/290272817747588220/1f6b384c3c0b485cac55c66c5f0b23be/artifacts
+end_time: 1765958644204
+entry_point_name: ''
+experiment_id: '290272817747588220'
+lifecycle_stage: active
+run_id: 1f6b384c3c0b485cac55c66c5f0b23be
+run_name: auspicious-dog-640
+run_uuid: 1f6b384c3c0b485cac55c66c5f0b23be
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765958640606
+status: 3
+tags: []
+user_id: runner
