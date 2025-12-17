@@ -30,11 +30,15 @@ jobs:
           ls MLProject/diabetes_preprocessing/
           wc -l MLProject/diabetes_preprocessing/*.csv
 
+      - name: Create mlruns directory
+        run: |
+          mkdir -p MLProject/mlruns
+
       - name: Run training
         run: |
           cd MLProject
-          export MLFLOW_TRACKING_URI=file:./mlruns
-          export MLFLOW_ARTIFACT_ROOT=./mlruns
+          export MLFLOW_TRACKING_URI="file://$(pwd)/mlruns"
+          echo "Using tracking URI: $MLFLOW_TRACKING_URI"
           mlflow run . --env-manager=local
 
       - name: Find and verify model

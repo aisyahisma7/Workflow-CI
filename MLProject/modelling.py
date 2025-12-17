@@ -48,7 +48,4 @@ def train_model():
     return model
 
 if __name__ == "__main__":  
-    tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "file:./mlruns")
-    mlflow.set_tracking_uri(tracking_uri)
-    
     train_model()
