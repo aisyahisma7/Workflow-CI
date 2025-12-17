@@ -3,7 +3,7 @@ import mlflow
 import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-
+import os
 
 def train_model():
     train = pd.read_csv("diabetes_preprocessing/diabetes_train.csv")
@@ -48,4 +48,7 @@ def train_model():
     return model
 
 if __name__ == "__main__":  
+    tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "file:./mlruns")
+    mlflow.set_tracking_uri(tracking_uri)
+    
     train_model()
