@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/MLProject/mlruns/290272817747588220/364ceb2d19f049239117e28fc9cbd884/artifacts
+end_time: 1765955572119
+entry_point_name: ''
+experiment_id: '290272817747588220'
+lifecycle_stage: active
+run_id: 364ceb2d19f049239117e28fc9cbd884
+run_name: redolent-trout-570
+run_uuid: 364ceb2d19f049239117e28fc9cbd884
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765955572111
+status: 3
+tags: []
+user_id: runner

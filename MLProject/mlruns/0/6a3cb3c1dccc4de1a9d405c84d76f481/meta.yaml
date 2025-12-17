@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Aisyah%20Isma/Downloads/Eksperimen_SML_Aisyah%20Ismajati-20251215T110519Z-1-001/Eksperimen_SML_Aisyah%20Ismajati/Workflow-CI/MLProject/mlruns/0/6a3cb3c1dccc4de1a9d405c84d76f481/artifacts
+end_time: 1765955572305
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6a3cb3c1dccc4de1a9d405c84d76f481
+run_name: bald-cod-547
+run_uuid: 6a3cb3c1dccc4de1a9d405c84d76f481
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765955569801
+status: 3
+tags: []
+user_id: runner
