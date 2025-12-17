@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Aisyah%20Isma/Downloads/Eksperimen_SML_Aisyah%20Ismajati-20251215T110519Z-1-001/Eksperimen_SML_Aisyah%20Ismajati/Workflow-CI/MLProject/mlruns/0/f61e8d3afd2244f68e9b8678cc4c439f/artifacts
+end_time: 1765955187090
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f61e8d3afd2244f68e9b8678cc4c439f
+run_name: brawny-hare-951
+run_uuid: f61e8d3afd2244f68e9b8678cc4c439f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765955184425
+status: 3
+tags: []
+user_id: runner
