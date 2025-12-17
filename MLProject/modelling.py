@@ -16,8 +16,6 @@ def train_model():
     X_test = test.drop("Outcome", axis=1)
     y_test = test["Outcome"]
 
-    mlflow.sklearn.autolog()
-
     with mlflow.start_run(run_name="basic_rf"):
         model = RandomForestClassifier(
             n_estimators=100,
@@ -26,31 +24,31 @@ def train_model():
         model.fit(X_train, y_train)
 
         y_pred = model.predict(X_test)
+
         acc = accuracy_score(y_test, y_pred)
         prec = precision_score(y_test, y_pred)
         rec = recall_score(y_test, y_pred)
         f1 = f1_score(y_test, y_pred)
-        
+
         mlflow.log_param("model_type", "RandomForestClassifier")
         mlflow.log_param("n_estimators", 100)
-        
+
         mlflow.log_metric("accuracy", acc)
         mlflow.log_metric("precision", prec)
         mlflow.log_metric("recall", rec)
         mlflow.log_metric("f1_score", f1)
-        
+
         signature = infer_signature(X_train, model.predict(X_train))
-        input_example = X_train.head(1)
 
         mlflow.sklearn.log_model(
-            model, 
-            "model", 
+            model,
+            artifact_path="model",
             signature=signature,
-            input_example=input_example
+            input_example=X_train.head(1)
         )
-                
-        print(f"\nResults:")
-        print(f"Accuracy: {acc:.4f}")
+
+        print("\nResults:")
+        print(f"Accuracy : {acc:.4f}")
         print(f"Precision: {prec:.4f}")
 
 
