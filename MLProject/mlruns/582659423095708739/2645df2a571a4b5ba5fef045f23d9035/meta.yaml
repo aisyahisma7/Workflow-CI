@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Aisyah Isma/Downloads/SMSML_Aisyah Ismajati/Workflow-CI/MLProject/mlruns/582659423095708739/2645df2a571a4b5ba5fef045f23d9035/artifacts
+end_time: 1765952024434
+entry_point_name: ''
+experiment_id: '582659423095708739'
+lifecycle_stage: active
+run_id: 2645df2a571a4b5ba5fef045f23d9035
+run_name: basic_rf
+run_uuid: 2645df2a571a4b5ba5fef045f23d9035
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765951988555
+status: 3
+tags: []
+user_id: Aisyah Isma
