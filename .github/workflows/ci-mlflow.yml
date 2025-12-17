@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install required dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install mlflow==2.9.2 \
@@ -41,19 +41,20 @@ jobs:
             exit 1
           fi
 
-          echo "Dataset files are available"
+          wc -l MLProject/diabetes_preprocessing/*.csv
 
-      - name: Run MLflow project
+      - name: Run MLflow training
         run: |
           cd MLProject
+          export MLFLOW_TRACKING_URI=file:./mlruns
           mlflow run . --env-manager=local
-        env:
-          MLFLOW_TRACKING_URI: file:./mlruns
-          MLFLOW_ARTIFACT_URI: file:./mlruns
 
       - name: Training summary
+        if: always()
         run: |
-          echo "Training pipeline completed successfully"
+          if [ -d "MLProject/mlruns" ]; then
+            du -sh MLProject/mlruns || true
+          fi
 
 permissions:
   contents: read
