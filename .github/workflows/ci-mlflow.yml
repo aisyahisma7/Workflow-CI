@@ -31,8 +31,6 @@ jobs:
 
       - name: Verify dataset files
         run: |
-          echo "Checking dataset availability..."
-
           if [ ! -f "MLProject/diabetes_preprocessing/diabetes_train.csv" ]; then
             echo "diabetes_train.csv not found"
             exit 1
@@ -49,6 +47,9 @@ jobs:
         run: |
           cd MLProject
           mlflow run . --env-manager=local
+        env:
+          MLFLOW_TRACKING_URI: file:./mlruns
+          MLFLOW_ARTIFACT_URI: file:./mlruns
 
       - name: Training summary
         run: |
