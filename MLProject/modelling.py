@@ -3,7 +3,6 @@ import mlflow
 import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-import os
 
 def train_model():
     train = pd.read_csv("diabetes_preprocessing/diabetes_train.csv")

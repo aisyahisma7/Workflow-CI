@@ -34,12 +34,22 @@ jobs:
         run: |
           mkdir -p MLProject/mlruns
 
-      - name: Run training
+      - name: Set MLflow environment
         run: |
           cd MLProject
-          export MLFLOW_TRACKING_URI="file://$(pwd)/mlruns"
+          # Set tracking URI sebagai environment variable
+          echo "MLFLOW_TRACKING_URI=file://$(pwd)/mlruns" >> $GITHUB_ENV
+
+      - name: Run training with MLflow Project
+        run: |
+          cd MLProject
           echo "Using tracking URI: $MLFLOW_TRACKING_URI"
-          mlflow run . --env-manager=local
+          # Gunakan mlflow run dengan backend-config
+          mlflow run . \
+            --env-manager=local \
+            --experiment-name=diabetes_prediction
+        env:
+          MLFLOW_TRACKING_URI: file:///home/runner/work/Workflow-CI/Workflow-CI/MLProject/mlruns
 
       - name: Find and verify model
         id: find_model
