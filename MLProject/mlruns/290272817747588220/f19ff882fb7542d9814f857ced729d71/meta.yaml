@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/MLProject/mlruns/290272817747588220/f19ff882fb7542d9814f857ced729d71/artifacts
+end_time: 1765958316454
+entry_point_name: ''
+experiment_id: '290272817747588220'
+lifecycle_stage: active
+run_id: f19ff882fb7542d9814f857ced729d71
+run_name: treasured-cow-381
+run_uuid: f19ff882fb7542d9814f857ced729d71
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765958313106
+status: 3
+tags: []
+user_id: runner
