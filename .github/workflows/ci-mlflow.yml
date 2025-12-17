@@ -102,9 +102,9 @@ jobs:
           MODEL_PATH="${{ steps.find_model.outputs.model_path }}"
           echo "Building Docker image from: $MODEL_PATH"
 
-          unset DOCKER_HOST
+          export DOCKER_HOST=unix:///var/run/docker.sock
 
-          docker version
+          python3 -c "import docker; client = docker.from_env(); print(client.version())"
           
           mlflow models build-docker \
             -m "$(pwd)/$MODEL_PATH" \
