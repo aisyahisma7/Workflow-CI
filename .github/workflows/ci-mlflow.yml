@@ -37,14 +37,12 @@ jobs:
       - name: Set MLflow environment
         run: |
           cd MLProject
-          # Set tracking URI sebagai environment variable
           echo "MLFLOW_TRACKING_URI=file://$(pwd)/mlruns" >> $GITHUB_ENV
 
       - name: Run training with MLflow Project
         run: |
           cd MLProject
           echo "Using tracking URI: $MLFLOW_TRACKING_URI"
-          # Gunakan mlflow run dengan backend-config
           mlflow run . \
             --env-manager=local \
             --experiment-name=diabetes_prediction
@@ -91,24 +89,42 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install Docker Python package
+      - name: Fix Docker Python library
         run: |
-          pip install docker
+          # Uninstall dan reinstall docker library dengan versi yang kompatibel
+          pip uninstall -y docker docker-py
+          pip install docker==6.1.3
 
-      - name: Build Docker image
+      - name: Build Docker image with mlflow build-docker
         run: |
           cd MLProject
           
           MODEL_PATH="${{ steps.find_model.outputs.model_path }}"
           echo "Building Docker image from: $MODEL_PATH"
-
-          export DOCKER_HOST=unix:///var/run/docker.sock
-
-          python3 -c "import docker; client = docker.from_env(); print(client.version())"
           
+          export DOCKER_HOST=unix:///var/run/docker.sock
+          
+          python3 << 'PYEOF'
+          import docker
+          import os
+          
+          os.environ['DOCKER_HOST'] = 'unix:///var/run/docker.sock'
+          
+          try:
+              client = docker.DockerClient(base_url='unix:///var/run/docker.sock')
+              print("Docker client created successfully!")
+              print(f"Docker version: {client.version()}")
+          except Exception as e:
+              print(f"Error: {e}")
+              import sys
+              sys.exit(1)
+          PYEOF
+
           mlflow models build-docker \
             -m "$(pwd)/$MODEL_PATH" \
             -n "${{ secrets.DOCKER_USERNAME }}/diabetes-model:latest"
+        env:
+          DOCKER_HOST: unix:///var/run/docker.sock
 
       - name: Push Docker image
         run: |
