@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Aisyah%20Isma/Downloads/Eksperimen_SML_Aisyah%20Ismajati-20251215T110519Z-1-001/Eksperimen_SML_Aisyah%20Ismajati/Workflow-CI/MLProject/mlruns/0/60e24527e08246b6a60c27c5b1dc7b7c/artifacts
+end_time: 1765942133822
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 60e24527e08246b6a60c27c5b1dc7b7c
+run_name: basic_rf
+run_uuid: 60e24527e08246b6a60c27c5b1dc7b7c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765942121549
+status: 3
+tags: []
+user_id: Aisyah Isma
