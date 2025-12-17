@@ -37,12 +37,31 @@ jobs:
           export MLFLOW_ARTIFACT_ROOT=./mlruns
           mlflow run . --env-manager=local
 
-      - name: Check results
+      - name: Find and verify model
+        id: find_model
         run: |
-          if [ -d "MLProject/mlruns" ]; then
-            echo "Training completed"
-            ls -la MLProject/mlruns/
+          cd MLProject
+          
+          echo "Searching for MLmodel files..."
+          find mlruns -name "MLmodel" -type f
+          
+          echo ""
+          echo "Looking for model artifacts..."
+          MODEL_FILE=$(find mlruns -name "MLmodel" -type f | head -1)
+          
+          if [ -z "$MODEL_FILE" ]; then
+            echo "ERROR: No model found!"
+            echo "Checking mlruns structure:"
+            ls -R mlruns/
+            exit 1
           fi
+          
+          MODEL_DIR=$(dirname "$MODEL_FILE")
+          echo "Found model at: $MODEL_DIR"
+          
+          ls -la "$MODEL_DIR"
+          
+          echo "model_path=$MODEL_DIR" >> $GITHUB_OUTPUT
 
       - name: Commit artifacts to repository
         run: |
@@ -58,29 +77,29 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image with MLflow
+      - name: Build Docker image
         run: |
           cd MLProject
           
-          # Cari run ID terbaru
-          RUN_ID=$(ls -t mlruns/0 | grep -v meta.yaml | head -1)
-          echo "Latest Run ID: $RUN_ID"
-          
-          # Build Docker image
+          MODEL_PATH="${{ steps.find_model.outputs.model_path }}"
+          echo "Building Docker image from: $MODEL_PATH"
+
           mlflow models build-docker \
-            -m "mlruns/0/$RUN_ID/artifacts/model" \
+            -m "$(pwd)/$MODEL_PATH" \
             -n "${{ secrets.DOCKER_USERNAME }}/diabetes-model:latest"
 
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/diabetes-model:latest
-          echo "Docker image pushed to Docker Hub!"
-          echo "https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/diabetes-model"
+          
+          echo ""
+          echo "Docker image pushed successfully!"
+          echo "View at: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/diabetes-model"
 
-      - name: Create Docker Hub link file
+      - name: Create Docker Hub link
         run: |
           cd MLProject
-          echo "Docker Hub: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/diabetes-model" > docker-hub-link.txt
+          echo "https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/diabetes-model" > docker-hub-link.txt
           cat docker-hub-link.txt
 
       - name: Commit Docker Hub link
