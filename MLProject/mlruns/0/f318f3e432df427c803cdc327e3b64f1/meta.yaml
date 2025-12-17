@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Aisyah%20Isma/Downloads/Eksperimen_SML_Aisyah%20Ismajati-20251215T110519Z-1-001/Eksperimen_SML_Aisyah%20Ismajati/Workflow-CI/MLProject/mlruns/0/f318f3e432df427c803cdc327e3b64f1/artifacts
+end_time: 1765953749942
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f318f3e432df427c803cdc327e3b64f1
+run_name: rogue-bee-416
+run_uuid: f318f3e432df427c803cdc327e3b64f1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765953747759
+status: 3
+tags: []
+user_id: runner
